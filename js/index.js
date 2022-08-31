@@ -20,13 +20,16 @@ function findTotal(e) {
   const tipPercent = parseInt(btnPercent, 10) / 100;
 
   // Find subtotal value
-  const subtotalVal = subtotalValEl.value;
-  console.log(subtotalVal);
+  const subtotalVal = Number(subtotalValEl.value);
+  console.log(typeof subtotalVal);
 
-  calculateTotal(tipPercent, subtotalVal);
+  const totals = calculateTotal(tipPercent, subtotalVal);
 }
 
 function calculateTotal(tipPercent, subtotal) {
+  const tipAmt = tipPercent * subtotal;
+  const totalAmt = subtotal + tipAmt;
 
+  return [tipAmt.toFixed(2), totalAmt.toFixed(2)];
 }
 
