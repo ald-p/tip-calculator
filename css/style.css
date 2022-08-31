@@ -10,7 +10,7 @@ body {
   letter-spacing: 0.8px;
   max-width: 300px;
   text-align: center;
-  margin: 3rem 4rem;
+  margin: 3rem auto;
 }
 
 #title {
@@ -51,6 +51,14 @@ body {
   font-size: 0.9rem;
   font-weight: 600;
   font-family: inherit;
+  transition: ease-in 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  background-color: #ececec;
+  color: rgba(233, 184, 114, 1);
 }
 
 #tip-percent-section {
@@ -66,4 +74,14 @@ body {
 
 #totals-section {
   margin-top: 2rem;
+}
+
+#tip-amt {
+  margin: 1rem 0 2rem 0;
+  font-size: 2rem;
+}
+
+#total-amt {
+  margin: 1rem;
+  font-size: 3rem;
 }
