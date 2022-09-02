@@ -26,7 +26,7 @@ body {
   margin-bottom: 2rem;
 }
 
-#subtotal-val {
+.input-number {
   margin: 1rem 0;
   width: 100%;
   box-sizing: border-box;
@@ -54,7 +54,7 @@ body {
   transition: ease-in 0.3s;
 }
 
-.btn:hover {
+.btn:hover, .btn.active {
   transform: scale(1.1);
   cursor: pointer;
   background-color: #ececec;
@@ -68,7 +68,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-#custom-tip-section button{
+#custom-tip-btn{
   width: 220px;
 }
 
@@ -84,4 +84,27 @@ body {
 #total-amt {
   margin: 1rem;
   font-size: 3rem;
+}
+
+#calculate-btn {
+  width: 70px;
+  background-color: #ececec;
+  color: black;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.section-no-show {
+  height: 0;
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: all ease 0.2s;
+}
+
+.section-show {
+  opacity: 1;
+  visibility: visible;
+  height: 10rem;
+  transform: translateY(15px);
+  transition: all ease 0.2s;
 }

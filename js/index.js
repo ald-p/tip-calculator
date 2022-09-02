@@ -7,14 +7,17 @@ const customTipBtn = document.getElementById('custom-tip-btn');
 const subtotalValEl = document.getElementById('subtotal-val');
 const tipAmtEl = document.getElementById('tip-amt');
 const totalAmtEl = document.getElementById('total-amt');
+const customTipSection = document.getElementById('custom-tip-section');
 
 /* Variables */
 
 /* Event listeners */
 tipPercentSection.addEventListener('click', findTotal, false);
+customTipBtn.addEventListener('click', showCustomTipSection, false);
 
 /* Functions */
 function findTotal(e) {
+
   // Find tip percent
   const btnPercent = e.target.textContent;
   const tipPercent = parseInt(btnPercent, 10) / 100;
@@ -41,3 +44,14 @@ function renderAmounts(tipAmt, totalAmt) {
   totalAmtEl.textContent = `$${totalAmt}`;
 }
 
+function showCustomTipSection() {
+  if (customTipSection.classList.contains('section-show')) {
+    customTipSection.classList.remove('section-show');
+    customTipSection.classList.add('section-no-show');
+    console.log(customTipSection)
+  } else {
+    customTipSection.classList.remove('section-no-show');
+    customTipSection.classList.add('section-show');
+    console.log(customTipSection)
+  }
+}
