@@ -43,6 +43,7 @@ body {
 .btn {
   border: none;
   background: none;
+  margin: 0.5rem 0.5rem;
   padding: 0.6rem;
   border: 2px solid #ececec;
   border-radius: 5px;
@@ -54,22 +55,15 @@ body {
   transition: ease-in 0.3s;
 }
 
-.btn:hover, .btn.active {
+.btn:hover, .btn-clicked {
   transform: scale(1.1);
   cursor: pointer;
   background-color: #ececec;
   color: rgba(233, 184, 114, 1);
 }
 
-#tip-percent-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin-bottom: 1.5rem;
-}
-
 #custom-tip-btn{
-  width: 220px;
+  width: 200px;
 }
 
 #totals-section {
@@ -87,7 +81,7 @@ body {
 }
 
 #calculate-btn {
-  width: 70px;
+  width: 120px;
   background-color: #ececec;
   color: black;
   font-weight: 400;
@@ -98,7 +92,7 @@ body {
   height: 0;
   opacity: 0;
   transform: translateY(-15px);
-  transition: all ease 0.2s;
+  transition: all ease 0.3s;
 }
 
 .section-show {
@@ -106,5 +100,5 @@ body {
   visibility: visible;
   height: 10rem;
   transform: translateY(15px);
-  transition: all ease 0.2s;
+  transition: all ease 0.3s;
 }
