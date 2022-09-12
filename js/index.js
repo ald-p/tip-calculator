@@ -49,11 +49,25 @@ function tipPercentButtonClicked(e) {
 }
 
 function customTipCalculateClicked() {
-  const customTipAmt = Number(customTipSection.children[0].value);
-  const subtotal = Number(subtotalValEl.value)
-  const total = subtotal + customTipAmt;
+  const currentBtnClicked = document.querySelectorAll('.pct-amt-btn-clicked')[0].textContent;
+  const customTipAmt = Number(customTipSection.children[1].value);
+  const subtotal = Number(subtotalValEl.value);
+  let tipAmt = 0;
+  let total = 0;
 
-  renderAmounts(customTipAmt, total);
+  customTipSection.children[1].value = '';
+
+  if (currentBtnClicked === '%') {
+    const tipPercent = parseInt(customTipAmt, 10) / 100;
+    const totals = calculateTotal(tipPercent, subtotal);
+    tipAmt = totals[0];
+    total = totals[1];
+  } else {
+    tipAmt = customTipAmt;
+    total = subtotal + customTipAmt;
+  }
+
+  renderAmounts(tipAmt, total);
 }
 
 function pctAmtElClicked(e) {
@@ -92,7 +106,6 @@ function showCustomTipSection() {
 
 function toggleButtonStyles(targetEl, className, clickClassName) {
   const buttons = document.querySelectorAll(className);
-  console.log(targetEl)
   buttons.forEach( btn => btn.classList.remove(clickClassName));
   targetEl.classList.add(clickClassName);
 
