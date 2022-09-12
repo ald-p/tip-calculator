@@ -9,17 +9,19 @@ const totalAmtEl = document.getElementById('total-amt');
 const customTipSection = document.getElementById('custom-tip-section');
 const customTipBtn = document.getElementById('custom-tip-btn');
 const calculateBtn = document.getElementById('calculate-btn');
+const pctAmtBtns = document.getElementById('pct-amt-tip-btns'); 
 
 /* Variables */
 
 /* Event listeners */
 tipPercentSection.addEventListener('click', tipPercentButtonClicked, false);
 calculateBtn.addEventListener('click', customTipCalculateClicked, false);
+pctAmtBtns.addEventListener('click', pctAmtElClicked, false);
 
 /* Functions */
 function tipPercentButtonClicked(e) {
   if (e.target.classList.contains('btn')) {
-    toggleButtonStyles(e.target);
+    toggleButtonStyles(e.target, '.tip-btn', 'btn-clicked');
 
     if (e.target.id === 'custom-tip-btn') {
       showCustomTipSection();
@@ -54,6 +56,16 @@ function customTipCalculateClicked() {
   renderAmounts(customTipAmt, total);
 }
 
+function pctAmtElClicked(e) {
+  toggleButtonStyles(e.target, '.pct-amt-btn', 'pct-amt-btn-clicked');
+
+  if (e.target.id === 'pct-btn') {
+    customTipSection.children[1].placeholder = 'Enter tip percent...';
+  } else {
+    customTipSection.children[1].placeholder = 'Enter tip amount...';
+  }
+}
+
 function calculateTotal(tipPercent, subtotal) {
   const tipAmt = tipPercent * subtotal;
   const totalAmt = subtotal + tipAmt;
@@ -78,8 +90,10 @@ function showCustomTipSection() {
   }
 }
 
-function toggleButtonStyles(targetEl) {
-  const buttons = document.querySelectorAll('.tip-btn');
-  buttons.forEach( btn => btn.classList.remove('btn-clicked'));
-  targetEl.classList.add('btn-clicked');
+function toggleButtonStyles(targetEl, className, clickClassName) {
+  const buttons = document.querySelectorAll(className);
+  console.log(targetEl)
+  buttons.forEach( btn => btn.classList.remove(clickClassName));
+  targetEl.classList.add(clickClassName);
+
 }
