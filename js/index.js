@@ -11,7 +11,14 @@ const customTipBtn = document.getElementById('custom-tip-btn');
 const calculateBtn = document.getElementById('calculate-btn');
 const pctAmtBtns = document.getElementById('pct-amt-tip-btns'); 
 
-/* Variables */
+// Currency formatter
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+});
+
+console.log(formatter.format(70))
+
 
 /* Event listeners */
 tipPercentSection.addEventListener('click', tipPercentButtonClicked, false);
@@ -84,12 +91,12 @@ function calculateTotal(tipPercent, subtotal) {
   const tipAmt = tipPercent * subtotal;
   const totalAmt = subtotal + tipAmt;
 
-  return [tipAmt.toFixed(2), totalAmt.toFixed(2)];
+  return [formatter.format(tipAmt), formatter.format(totalAmt)]
 }
 
 function renderAmounts(tipAmt, totalAmt) {
-  tipAmtEl.textContent = `$${tipAmt}`;
-  totalAmtEl.textContent = `$${totalAmt}`;
+  tipAmtEl.textContent = tipAmt;
+  totalAmtEl.textContent = totalAmt;
 }
 
 function showCustomTipSection() {
