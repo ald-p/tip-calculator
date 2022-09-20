@@ -159,3 +159,11 @@ body {
   border-left: 1px solid #ececec;
   border-radius: 0 20px 20px 0;
 }
+
+.validate {
+  margin-top: 1rem;
+  /*background-color: #ffcccb;*/
+  /*padding: 0.75rem 0.75rem;*/
+  font-size: 0.8rem;
+  color: red;
+}

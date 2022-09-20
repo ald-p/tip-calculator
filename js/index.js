@@ -10,6 +10,7 @@ const customTipSection = document.getElementById('custom-tip-section');
 const customTipBtn = document.getElementById('custom-tip-btn');
 const calculateBtn = document.getElementById('calculate-btn');
 const pctAmtBtns = document.getElementById('pct-amt-tip-btns'); 
+const subtotalSection = document.getElementById('subtotal');
 
 // Currency formatter
 const formatter = new Intl.NumberFormat('en-US', {
@@ -59,14 +60,14 @@ function tipPercentButtonClicked(e) {
 function customTipCalculateClicked() {
   const customTipInput = customTipSection.children[1].value;
   if (!validate(customTipInput)) {return}
+  
+  showCustomTipSection();
 
   const currentBtnClicked = document.querySelectorAll('.pct-amt-btn-clicked')[0].textContent;
   const customTipAmt = Number(customTipInput);
   const subtotal = Number(subtotalValEl.value);
   let tipAmt = 0;
   let total = 0;
-
-  if (!validate(customTipAmt)) {return};
 
   customTipSection.children[1].value = '';
 
@@ -75,12 +76,12 @@ function customTipCalculateClicked() {
     const totals = calculateTotal(tipPercent, subtotal);
     tipAmt = totals[0];
     total = totals[1];
+    renderAmounts(tipAmt, total, tipPercent);
   } else {
     tipAmt = customTipAmt;
     total = subtotal + customTipAmt;
+    renderAmounts(tipAmt, total);
   }
-
-  renderAmounts(tipAmt, total);
 }
 
 function pctAmtElClicked(e) {
@@ -100,9 +101,14 @@ function calculateTotal(tipPercent, subtotal) {
   return [tipAmt, totalAmt];
 }
 
-function renderAmounts(tipAmt, totalAmt) {
-  tipAmtEl.textContent = formatter.format(tipAmt);
-  totalAmtEl.textContent = formatter.format(totalAmt);
+function renderAmounts(...args) {
+  if (args.length === 3) {
+    tipAmtEl.textContent = formatter.format(args[0]) + ` (${args[2]*100}%)`;
+  } else {
+    tipAmtEl.textContent = formatter.format(args[0]);
+  }
+  
+  totalAmtEl.textContent = formatter.format(args[1]);
 }
 
 function showCustomTipSection() {
@@ -125,7 +131,14 @@ function toggleButtonStyles(targetEl, className, clickClassName) {
 
 function validate(targetEl) {
   if (targetEl == '' || isNaN(targetEl)) {
-    console.log('no number')
+    if (subtotalSection.children[1].classList.contains('validate')) {
+      return false;
+    }
+    const validateEl = document.createElement('div');
+    validateEl.className = 'validate';
+    validateEl.textContent = 'Please enter a valid amount!';
+    subtotalSection.insertBefore(validateEl, subtotalValEl);
+    setTimeout( () => validateEl.remove(), 5000);
     return false;
   } else {
     return true;
