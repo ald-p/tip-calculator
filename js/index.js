@@ -26,8 +26,10 @@ pctAmtBtns.addEventListener('click', pctAmtElClicked, false);
 /* Functions */
 function tipPercentButtonClicked(e) {
   if (e.target.classList.contains('btn')) {
-    
-    
+    const subtotalInput = subtotalValEl.value;
+    if (!validate(subtotalInput)) {return};
+
+    toggleButtonStyles(e.target, '.tip-btn', 'btn-clicked');
 
     if (e.target.id === 'custom-tip-btn') {
       showCustomTipSection();
@@ -39,16 +41,9 @@ function tipPercentButtonClicked(e) {
       showCustomTipSection();
     }
 
-    const subtotalInput = subtotalValEl.value;
-    if (!validate(subtotalInput)) {return};
-    
-    toggleButtonStyles(e.target, '.tip-btn', 'btn-clicked');
-
     const subtotal = Number(subtotalInput);
-
     const btnPercent = e.target.textContent;
     const tipPercent = parseInt(btnPercent, 10) / 100;
-
     const totals = calculateTotal(tipPercent, subtotal);
 
     renderAmounts(totals[0], totals[1]);
