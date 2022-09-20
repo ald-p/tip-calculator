@@ -17,9 +17,6 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD'
 });
 
-console.log(formatter.format(70))
-
-
 /* Event listeners */
 tipPercentSection.addEventListener('click', tipPercentButtonClicked, false);
 calculateBtn.addEventListener('click', customTipCalculateClicked, false);
@@ -28,6 +25,7 @@ pctAmtBtns.addEventListener('click', pctAmtElClicked, false);
 /* Functions */
 function tipPercentButtonClicked(e) {
   if (e.target.classList.contains('btn')) {
+    
     toggleButtonStyles(e.target, '.tip-btn', 'btn-clicked');
 
     if (e.target.id === 'custom-tip-btn') {
@@ -40,15 +38,18 @@ function tipPercentButtonClicked(e) {
       showCustomTipSection();
     }
 
+    // Find subtotal value
+    const subtotalInput = subtotalValEl.value;
+    if (!validate(subtotalInput)) {return};
+
+    const subtotal = Number(subtotalInput);
+
     // Find tip percent
     const btnPercent = e.target.textContent;
     const tipPercent = parseInt(btnPercent, 10) / 100;
 
-    // Find subtotal value
-    const subtotalVal = Number(subtotalValEl.value);
-
     // Calculate tip and total amounts
-    const totals = calculateTotal(tipPercent, subtotalVal);
+    const totals = calculateTotal(tipPercent, subtotal);
 
     // Render
     renderAmounts(totals[0], totals[1]);
@@ -56,11 +57,16 @@ function tipPercentButtonClicked(e) {
 }
 
 function customTipCalculateClicked() {
+  const customTipInput = customTipSection.children[1].value;
+  if (!validate(customTipInput)) {return}
+
   const currentBtnClicked = document.querySelectorAll('.pct-amt-btn-clicked')[0].textContent;
-  const customTipAmt = Number(customTipSection.children[1].value);
+  const customTipAmt = Number(customTipInput);
   const subtotal = Number(subtotalValEl.value);
   let tipAmt = 0;
   let total = 0;
+
+  if (!validate(customTipAmt)) {return};
 
   customTipSection.children[1].value = '';
 
@@ -91,12 +97,12 @@ function calculateTotal(tipPercent, subtotal) {
   const tipAmt = tipPercent * subtotal;
   const totalAmt = subtotal + tipAmt;
 
-  return [formatter.format(tipAmt), formatter.format(totalAmt)]
+  return [tipAmt, totalAmt];
 }
 
 function renderAmounts(tipAmt, totalAmt) {
-  tipAmtEl.textContent = tipAmt;
-  totalAmtEl.textContent = totalAmt;
+  tipAmtEl.textContent = formatter.format(tipAmt);
+  totalAmtEl.textContent = formatter.format(totalAmt);
 }
 
 function showCustomTipSection() {
@@ -115,5 +121,13 @@ function toggleButtonStyles(targetEl, className, clickClassName) {
   const buttons = document.querySelectorAll(className);
   buttons.forEach( btn => btn.classList.remove(clickClassName));
   targetEl.classList.add(clickClassName);
+}
 
+function validate(targetEl) {
+  if (targetEl == '' || isNaN(targetEl)) {
+    console.log('no number')
+    return false;
+  } else {
+    return true;
+  }
 }
