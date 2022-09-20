@@ -67,6 +67,7 @@ function customTipCalculateClicked() {
   let tipAmt = 0;
   let total = 0;
 
+  // Reset the text field to allow for another entry
   customTipSection.children[1].value = '';
 
   if (currentBtnClicked === '%') {
@@ -74,7 +75,8 @@ function customTipCalculateClicked() {
     const totals = calculateTotal(tipPercent, subtotal);
     tipAmt = totals[0];
     total = totals[1];
-    renderAmounts(tipAmt, total, tipPercent);
+    console.log(tipPercent)
+    renderAmounts(tipAmt, total, customTipAmt);
   } else {
     tipAmt = customTipAmt;
     total = subtotal + customTipAmt;
@@ -101,7 +103,7 @@ function calculateTotal(tipPercent, subtotal) {
 
 function renderAmounts(...args) {
   if (args.length === 3) {
-    tipAmtEl.textContent = formatter.format(args[0]) + ` (${args[2]*100}%)`;
+    tipAmtEl.textContent = formatter.format(args[0]) + ` (${args[2]}%)`;
   } else {
     tipAmtEl.textContent = formatter.format(args[0]);
   }
