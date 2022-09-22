@@ -1,5 +1,5 @@
-# tip-calculator
-A tool to help you calculate tip much faster. This app is one of the first projects I completed in my journey of becoming a developer. I hoped to bridge the three main web development technologies (HTML, CSS, JavaScript) and explored how they interact to create a useful product.
+# Tip Calculator
+A tool to help you calculate tip much faster, built with HTML, CSS, and JavaScript. This app is one of the first projects I completed in my journey of becoming a developer. I hoped to bridge the three main web development technologies (HTML, CSS, JavaScript) and explored how they interact to create a useful product.
 
 ## Features
 After entering a subtotal, the user is able to choose three default tip percentages: 18%, 20%, 25%. This is based on the most common tip percentages used in restaurants, bars, etc. Each percentage will calculate the corresponding tip amount and total amount. 
